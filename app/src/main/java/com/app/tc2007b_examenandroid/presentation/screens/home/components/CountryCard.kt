@@ -50,7 +50,7 @@ fun CountryCard(
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = country.officialName,
+                    text = country.name.official,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
