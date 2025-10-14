@@ -13,7 +13,7 @@ Producto Backlog y Empatizar (Desing Thinking)
 - Análisis de requisitos
 - Hisorias de usuario
 - Criterios de aceptación
-- Lluvia de ideas (¿Qué necesita nuetsro usuario?, ¿Cómo destacar/mejorar su propuesta?)
+- Lluvia de ideas (¿Qué necesita nuestro usuario?, ¿Cómo destacar/mejorar su propuesta?)
 ## Diseño
 ### Proceso Ágil 
 Idear & Prototipar 
