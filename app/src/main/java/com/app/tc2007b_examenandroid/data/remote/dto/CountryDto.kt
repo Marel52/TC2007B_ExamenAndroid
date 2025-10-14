@@ -5,4 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class CountryDto(
     @SerializedName("name")
     val name: NameDto,
+
+    @SerializedName("flags")
+    val flags: FlagsDto? = null,
 )

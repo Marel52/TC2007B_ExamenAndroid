@@ -10,7 +10,7 @@ interface CountryApiService {
 
     @GET("v3.1/all")
     suspend fun getCountryList(
-        @Query("fields") fields: String = "name"
+        @Query("fields") fields: String = "name,flags"
     ): List<CountryDto>
 
     @GET("v3.1/name/{name}")
