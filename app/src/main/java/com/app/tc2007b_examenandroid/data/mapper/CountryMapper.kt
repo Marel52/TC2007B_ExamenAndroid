@@ -3,10 +3,45 @@ package com.app.tc2007b_examenandroid.data.mapper
 import com.app.tc2007b_examenandroid.data.remote.dto.*
 import com.app.tc2007b_examenandroid.domain.model.*
 
-/**
- * Mapper para transformar DTOs de la API al domain
- * Manejo de campos opcionales y nulos
- */
+fun CountryDto.toDomain(): Country {
+    return Country(
+        name = name.toDomain(),
+        flags = flags?.toDomain(),
+        tld = null,
+        cca2 = null,
+        ccn3 = null,
+        cca3 = null,
+        cioc = null,
+        independent = null,
+        status = null,
+        unMember = null,
+        currencies = null,
+        idd = null,
+        capital = null,
+        altSpellings = null,
+        region = null,
+        subregion = null,
+        languages = null,
+        latlng = null,
+        landlocked = null,
+        borders = null,
+        area = null,
+        demonyms = null,
+        translations = null,
+        flag = null,
+        maps = null,
+        population = null,
+        gini = null,
+        fifa = null,
+        car = null,
+        timezones = null,
+        continents = null,
+        coatOfArms = null,
+        startOfWeek = null,
+        capitalInfo = null,
+        postalCode = null
+    )
+}
 
 fun CountryDetailDto.toDomain(): Country {
     return Country(
