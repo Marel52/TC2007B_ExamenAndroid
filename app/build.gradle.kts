@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.app.tc2007b_examenandroid"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation("androidx.compose.material:material-icons-extended:1.7.3")
     implementation(libs.androidx.navigation.compose)
 
     // Hilt
