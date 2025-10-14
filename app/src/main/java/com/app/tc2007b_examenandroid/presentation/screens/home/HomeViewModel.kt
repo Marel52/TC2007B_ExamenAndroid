@@ -24,6 +24,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         loadCountries()
+        loadLastVisitedCountry()
     }
 
     private fun loadCountries() {
@@ -54,5 +55,31 @@ class HomeViewModel @Inject constructor(
                     }
                 }
         }
+    }
+
+    // Cargar último país visitado
+    private fun loadLastVisitedCountry() {
+        val lastVisited = repository.getLastVisitedCountry()
+        _uiState.update { it.copy(lastVisitedCountry = lastVisited) }
+    }
+
+    // Filtrar países por nombre
+    fun onSearchQueryChange(query: String) {
+        _searchQuery.value = query
+
+        val filtered = if (query.isBlank()) {
+            _uiState.value.countryList
+        } else {
+            _uiState.value.countryList.filter { country ->
+                country.name.common.contains(query, ignoreCase = true) ||
+                        country.name.official.contains(query, ignoreCase = true)
+            }
+        }
+
+        _uiState.update { it.copy(filteredCountries = filtered) }
+    }
+
+    fun retry() {
+        loadCountries()
     }
 }

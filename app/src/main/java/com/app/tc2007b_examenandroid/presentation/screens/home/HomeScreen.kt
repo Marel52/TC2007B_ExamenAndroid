@@ -1,6 +1,8 @@
 package com.app.tc2007b_examenandroid.presentation.screens.home
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -17,11 +19,17 @@ fun HomeScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
+    var showSelfExplainedHook by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text("Países del Mundo") },
+                actions = {
+                    IconButton(onClick = { showSelfExplainedHook = true }) {
+                        Icon(Icons.Default.Info, contentDescription = "Info")
+                    }
+                }
             )
         }
     ) { padding ->
@@ -30,7 +38,7 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            // barra de búsqueda
+            // Barra de búsqueda
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { viewModel.onSearchQueryChange(it) },
@@ -52,4 +60,61 @@ fun HomeScreen(
             )
         }
     }
+
+
+    if (showSelfExplainedHook) {
+        SelfExplainedHook(onDismiss = { showSelfExplainedHook = false })
+    }
+}
+
+@Composable
+fun SelfExplainedHook(onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Self-explained hook") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text(
+                    text = "Arquitectura: MVVM",
+                    style = MaterialTheme.typography.titleSmall
+                )
+                Text(
+                    text = "La app sigue el patrón MVVM vista durante el curso, " +
+                            "separando en capas: Data, Domain, DI y Presentation. " +
+                            "La interfaz de dominio principal es CountryRepository, ",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+
+                Divider()
+
+                Text(
+                    text = "Estrategia de guardado de preferencias",
+                    style = MaterialTheme.typography.titleSmall
+                )
+                Text(
+                    text = "Se utiliza SharedPreferences para guardar el último país " +
+                            "visitado de forma persistente entre sesiones.",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+
+                Divider()
+
+                Text(
+                    text = "Estrategia de búsqueda",
+                    style = MaterialTheme.typography.titleSmall
+                )
+                Text(
+                    text = "La búsqueda filtra la lista de países en tiempo real " +
+                            "comparando el texto ingresado con los nombres comunes y " +
+                            "oficiales de cada país, sin distinción de mayúsculas.",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cerrar")
+            }
+        }
+    )
 }
