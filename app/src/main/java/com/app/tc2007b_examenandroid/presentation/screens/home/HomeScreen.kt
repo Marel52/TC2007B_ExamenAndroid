@@ -21,6 +21,10 @@ fun HomeScreen(
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
     var showSelfExplainedHook by remember { mutableStateOf(false) }
 
+    LaunchedEffect(Unit) {
+        viewModel.refreshLastVisited()
+    }
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(

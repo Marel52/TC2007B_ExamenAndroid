@@ -26,9 +26,11 @@ class CountryRepositoryImpl @Inject constructor(
         return try {
             val response = api.getCountryByName(name)
             if (response.isNotEmpty()) {
+                val country = response.first().toDomain()
 
-                preferencesManager.saveLastVisitedCountry(name)
-                Result.success(response.first().toDomain())
+                preferencesManager.saveLastVisitedCountry(country.name.common)
+
+                Result.success(country)
             } else {
                 Result.failure(Exception("País no encontrado"))
             }
