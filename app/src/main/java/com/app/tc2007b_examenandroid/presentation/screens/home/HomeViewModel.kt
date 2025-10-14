@@ -33,7 +33,6 @@ class HomeViewModel @Inject constructor(
 
             repository.getAllCountries()
                 .onSuccess { countries ->
-
                     countries.take(3).forEach { country ->
                         println("🏳️ ${country.name.common}: flags=${country.flags}")
                     }
@@ -57,13 +56,15 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    // Cargar último país visitado
     private fun loadLastVisitedCountry() {
         val lastVisited = repository.getLastVisitedCountry()
         _uiState.update { it.copy(lastVisitedCountry = lastVisited) }
     }
 
-    // Filtrar países por nombre
+    fun refreshLastVisited() {
+        loadLastVisitedCountry()
+    }
+
     fun onSearchQueryChange(query: String) {
         _searchQuery.value = query
 
