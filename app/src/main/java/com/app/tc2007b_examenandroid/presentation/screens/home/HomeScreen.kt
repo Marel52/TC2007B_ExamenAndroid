@@ -1,8 +1,6 @@
 package com.app.tc2007b_examenandroid.presentation.screens.home
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -11,7 +9,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app.tc2007b_examenandroid.presentation.screens.home.components.CountryListTab
 
-@Suppress("ktlint:standard:function-naming")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
@@ -20,17 +17,11 @@ fun HomeScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
-    var showInfoDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text("Países del Mundo") },
-                actions = {
-                    IconButton(onClick = { showInfoDialog = true }) {
-                        Icon(Icons.Default.Info, contentDescription = "Info")
-                    }
-                }
             )
         }
     ) { padding ->
@@ -39,7 +30,7 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            // Barra de búsqueda
+            // barra de búsqueda
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { viewModel.onSearchQueryChange(it) },
@@ -50,9 +41,10 @@ fun HomeScreen(
                 singleLine = true
             )
 
-            // Lista de países
+            // Lista de países con todos los estados
             CountryListTab(
-                countryList = uiState.countryList,
+                countryList = uiState.filteredCountries,
+                lastVisitedCountry = uiState.lastVisitedCountry,
                 isLoading = uiState.isLoading,
                 error = uiState.error,
                 onCountryClick = onCountryClick,
